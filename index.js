@@ -6,28 +6,24 @@ const { Server } = require('socket.io')
 const io = new Server(server)
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/testdb')
-mongoose.connection.on('error', (err) => {
-	console.log('err', err)
-})
+mongoose.connect(
+	'mongodb+srv://telugudjango:19VKErB2MJFomKhB@cluster0.jdyj4yf.mongodb.net/chat?retryWrites=true&w=majority'
+)
 
-mongoose.connection.on('connected', (err, res) => {
-	console.log('mongoose is connected')
-})
+mongoose.connection.on('error', (err) => {})
+
+mongoose.connection.on('connected', (err, res) => {})
 
 app.get('/', (req, res) => {
-	res.send('<h1>Hello</h1>')
+	res.send('<h1>Hello world</h1>')
 })
 
 io.on('connection', (socket) => {
-	console.log('a user connected')
-
-	socket.on('chat message', (msg) => {
+	socket.on('chat message', (msg, callback) => {
 		io.emit('chat message', msg)
-	})
-
-	socket.on('disconnect', () => {
-		console.log('user disconnected')
+		return callback({
+			response: { message: msg }
+		})
 	})
 })
 
