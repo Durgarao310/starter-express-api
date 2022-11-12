@@ -3,15 +3,6 @@ const app = express()
 const http = require('http')
 const server = http.createServer(app)
 var io = require('socket.io')(server)
-const mongoose = require('mongoose')
-
-mongoose.connect(
-	'mongodb+srv://telugudjango:19VKErB2MJFomKhB@cluster0.jdyj4yf.mongodb.net/chat?retryWrites=true&w=majority'
-)
-
-mongoose.connection.on('error', (err) => {})
-
-mongoose.connection.on('connected', (err, res) => {})
 
 app.get('/app', (req, res) => {
 	res.send('<h1>Hello world</h1>')
