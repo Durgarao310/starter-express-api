@@ -14,7 +14,7 @@ mongoose.connection.on('error', (err) => {})
 
 mongoose.connection.on('connected', (err, res) => {})
 
-app.get('/', (req, res) => {
+app.get('/app', (req, res) => {
 	res.send('<h1>Hello world</h1>')
 })
 
